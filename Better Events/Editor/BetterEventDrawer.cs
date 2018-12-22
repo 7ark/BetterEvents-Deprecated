@@ -63,7 +63,7 @@ public class BetterEventDrawer : OdinValueDrawer<BetterEventEntry>
             else if (args.Length == 4) delegateType = typeof(Action<,,,>).MakeGenericType(pTypes);
         }
 
-        if (delegateType == typeof(void))
+        if (delegateType == null)
         {
             Debug.LogError("Unsupported Method Type");
             return;
