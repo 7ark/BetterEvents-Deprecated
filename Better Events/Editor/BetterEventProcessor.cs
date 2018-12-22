@@ -2,6 +2,8 @@
 using System;
 using System.Collections.Generic;
 
+// This turns the BetterEventEntry.ParameterValues object array into properties in the inspector.
+
 public class BetterEventProcessor : OdinPropertyProcessor<BetterEventEntry>
 {
     public override void ProcessMemberProperties(List<InspectorPropertyInfo> propertyInfos)
@@ -23,7 +25,6 @@ public class BetterEventProcessor : OdinPropertyProcessor<BetterEventEntry>
 
     private class ArrayIndexGetterSetter<T> : IValueGetterSetter<object, T>
     {
-        private static object[] empty = new object[0];
         private readonly InspectorProperty property;
         private readonly int index;
 
