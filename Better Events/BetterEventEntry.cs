@@ -25,7 +25,8 @@ public class BetterEventEntry : ISerializationCallbackReceiver
     {
         if (this.Delegate != null && this.ParameterValues != null)
         {
-            this.Delegate.DynamicInvoke(this.ParameterValues);
+            // This is faster than Dynamic Invoke.
+            this.Delegate.Method.Invoke(this.Delegate.Target, this.ParameterValues); 
         }
     }
 
