@@ -28,16 +28,13 @@ public class BetterEventDrawer : OdinValueDrawer<BetterEventEntry>
                     this.tmpTarget = newTarget;
                 }
 
-                if (dInfo.Target)
+                EditorGUI.BeginChangeCheck();
+                var selectorText = (dInfo.Method == null || this.tmpTarget) ? "Select a method" : dInfo.Method.Name;
+                var newMethod = MethodSelector.DrawSelectorDropdown(methodSelectorRect, selectorText, this.CreateSelector);
+                if (EditorGUI.EndChangeCheck())
                 {
-                    EditorGUI.BeginChangeCheck();
-                    var selectorText = dInfo.Method == null ? "Select a method" : dInfo.Method.GetNiceName();
-                    var newMethod = MethodSelector.DrawSelectorDropdown(methodSelectorRect, selectorText, this.CreateSelector);
-                    if (EditorGUI.EndChangeCheck())
-                    {
-                        this.CreateAndAssignNewDelegate(newMethod.FirstOrDefault());
-                        this.tmpTarget = null;
-                    }
+                    this.CreateAndAssignNewDelegate(newMethod.FirstOrDefault());
+                    this.tmpTarget = null;
                 }
             }
             SirenixEditorGUI.EndToolbarBoxHeader();
