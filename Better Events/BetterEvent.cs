@@ -3,8 +3,7 @@ using System;
 using System.Collections.Generic;
 
 [Serializable]
-[HideReferenceObjectPicker]
-public class BetterEvent
+public struct BetterEvent
 {
     [HideReferenceObjectPicker, ListDrawerSettings(CustomAddFunction = "GetDefaultBetterEvent", OnTitleBarGUI = "DrawInvokeButton")]
     public List<BetterEventEntry> Events;
