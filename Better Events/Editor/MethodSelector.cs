@@ -1,5 +1,4 @@
-﻿using Sirenix.OdinInspector;
-using Sirenix.OdinInspector.Editor;
+﻿using Sirenix.OdinInspector.Editor;
 using Sirenix.Utilities;
 using Sirenix.Utilities.Editor;
 using System;
@@ -124,7 +123,7 @@ public class MethodSelector : OdinSelector<DelegateInfo>
         if (o != null && (o.Value & MethodImplOptions.InternalCall) != 0) return false;
 
         // We can't detect whether a member is internal or public. Luckily Unity use a naming convension.
-        if (mi.DeclaringType.Namespace.StartsWith("UnityEngine") && mi.Name.StartsWith("Internal", StringComparison.InvariantCultureIgnoreCase)) return false;
+        if ((mi.DeclaringType.Namespace ?? "").StartsWith("UnityEngine") && mi.Name.StartsWith("Internal", StringComparison.InvariantCultureIgnoreCase)) return false;
 
         // Note: 
         // We can't filter out Extern methods. There are many important extern methods.
