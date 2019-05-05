@@ -44,7 +44,6 @@ public class MethodSelector : OdinSelector<DelegateInfo>
         this.staticMethodMenuItemStyle.IconPadding = 0;
         this.staticMethodMenuItemStyle.Offset -= this.staticMethodMenuItemStyle.IconSize;
 
-
         // Add methods
         if (this.gameObjectTarget)
         {
@@ -107,7 +106,10 @@ public class MethodSelector : OdinSelector<DelegateInfo>
     private static bool ShouldIncludeMethod(MethodInfo mi)
     {
         // Only include methods without a return-type.
-        if (mi.ReturnType != typeof(void)) return false;
+        //if (mi.ReturnType != typeof(void)) return false;
+
+        // No get properties!
+        if (mi.ReturnType != typeof(void) && mi.IsSpecialName && mi.Name.StartsWith("get_")) return false; // There's probably a better way of doing this.
 
         // No generic methods.
         if (mi.IsGenericMethod) return false;

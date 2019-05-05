@@ -40,7 +40,12 @@ public class BetterEventDrawer : OdinValueDrawer<BetterEventEntry>
             SirenixEditorGUI.EndToolbarBoxHeader();
 
             // Draws the rest of the ICustomEvent, and since we've drawn the label, we simply pass along null.
-            this.CallNextDrawer(null);
+            for (int i = 0; i < this.Property.Children.Count; i++)
+            {
+                var child = this.Property.Children[i];
+                if (child.Name == "Result") continue;
+                child.Draw();
+            }
         }
         SirenixEditorGUI.EndBox();
     }
@@ -61,8 +66,19 @@ public class BetterEventDrawer : OdinValueDrawer<BetterEventEntry>
             else if (args.Length == 2) delegateType = typeof(Action<,>).MakeGenericType(pTypes);
             else if (args.Length == 3) delegateType = typeof(Action<,,>).MakeGenericType(pTypes);
             else if (args.Length == 4) delegateType = typeof(Action<,,,>).MakeGenericType(pTypes);
+            else if (args.Length == 5) delegateType = typeof(Action<,,,,>).MakeGenericType(pTypes);
         }
-
+        else
+        {
+            pTypes = pTypes.Append(method.ReturnType).ToArray();
+            if (args.Length == 0) delegateType = typeof(Func<>).MakeArrayType();
+            else if (args.Length == 1) delegateType = typeof(Func<,>).MakeGenericType(pTypes);
+            else if (args.Length == 2) delegateType = typeof(Func<,,>).MakeGenericType(pTypes);
+            else if (args.Length == 3) delegateType = typeof(Func<,,,>).MakeGenericType(pTypes);
+            else if (args.Length == 4) delegateType = typeof(Func<,,,,>).MakeGenericType(pTypes);
+            else if (args.Length == 5) delegateType = typeof(Func<,,,,,>).MakeGenericType(pTypes);
+        }
+        
         if (delegateType == null)
         {
             Debug.LogError("Unsupported Method Type");

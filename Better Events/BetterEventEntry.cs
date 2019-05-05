@@ -1,4 +1,6 @@
-﻿using Sirenix.Serialization;
+﻿using Sirenix.OdinInspector;
+using Sirenix.Serialization;
+using Sirenix.Utilities;
 using System;
 using System.Collections.Generic;
 using UnityEngine;
@@ -11,6 +13,8 @@ public class BetterEventEntry : ISerializationCallbackReceiver
 
     [NonSerialized, HideInInspector]
     public object[] ParameterValues;
+
+    //public object Result;
 
     public BetterEventEntry(Delegate del) 
     {
@@ -26,9 +30,10 @@ public class BetterEventEntry : ISerializationCallbackReceiver
         if (this.Delegate != null && this.ParameterValues != null)
         {
             // This is faster than Dynamic Invoke.
-            this.Delegate.Method.Invoke(this.Delegate.Target, this.ParameterValues); 
+            /*this.Result = */this.Delegate.Method.Invoke(this.Delegate.Target, this.ParameterValues); 
         }
     }
+
 
     #region OdinSerialization
     [SerializeField, HideInInspector]
