@@ -1,3 +1,6 @@
+# [Deprecated]
+Just a notice that this repo is deprecated, we are no longer actively updating it, fixing issues, etc. There are several known issues that are simply too difficult and time consuming to currently address - I hope you understand. Feel free to still download and use the asset, just do so at your own risk.
+
 # BetterEvents 
 *A simple and more powerful replacement for UnityEvents that are: better*
 
